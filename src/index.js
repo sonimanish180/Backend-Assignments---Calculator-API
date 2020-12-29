@@ -20,6 +20,7 @@ app.post('/add', (req, res) => {
 
     let num1 = req.body.num1;
     let num2 = req.body.num2;
+    let sum = parseFloat(num1) +  parseFloat(num2);
 
     let response = {};
 
@@ -29,7 +30,7 @@ app.post('/add', (req, res) => {
     //     return;
     // }
 
-    if (isNaN(num1) || isNaN(num2)) {
+    if (typeof(num1) === "string" || typeof(num2) === "string") {
         response.status = "error";
         response.message = "Invalid data types";
         res.status(400).send(response);
@@ -49,9 +50,25 @@ app.post('/add', (req, res) => {
         res.status(400).send(response);
         return;
     }
+
+    if (sum>1000000) {
+        response.status = "error";
+        response.message = "Overflow";
+        res.status(400).send(response);
+        return;
+    }
+
+    if (sum<-1000000) {
+        response.status = "error";
+        response.message = "Underflow";
+        res.status(400).send(response);
+        return;
+    }
+
+
     response.status = "success";
     response.message = "the sum of given two numbers";
-    response.sum = Number(num1)+Number(num2);
+    response.sum = sum;
     console.log(req.body);
     res.status(200).send(response);
 });
