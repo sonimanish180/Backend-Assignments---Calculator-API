@@ -125,6 +125,116 @@ app.post('/sub', (req, res) => {
     res.send(response);
 });
 
+app.post('/multiply', (req, res) => {
+
+    let num1 = req.body.num1;
+    let num2 = req.body.num2;
+    let result = parseFloat(num1)*parseFloat(num2);
+
+    let response = {};
+    
+    if (num1>1000000 || num2>1000000) {
+        response.status = "error";
+        response.message = "Overflow";
+        res.send(response);
+        return;
+    }
+
+    if (num1<-1000000 || num2<-1000000) {
+        response.status = "error";
+        response.message = "Underflow";
+        res.send(response);
+        return;
+    }
+
+    if (typeof(num1) === "string" || typeof(num2) === "string") {
+        response.status = "error";
+        response.message = "Invalid data types";
+        res.send(response);
+        return;
+    }
+
+    if (difference>1000000) {
+        response.status = "error";
+        response.message = "Overflow";
+        res.send(response);
+        return;
+    }
+
+    if (difference<-1000000) {
+        response.status = "error";
+        response.message = "Underflow";
+        res.send(response);
+        return;
+    }
+
+
+    response.status = "success";
+    response.message = "The product of given numbers";
+    response.result = result;
+    console.log(req.body);
+    res.send(response);
+});
+
+app.post('/divide', (req, res) => {
+
+    let num1 = req.body.num1;
+    let num2 = req.body.num2;
+
+    if (parseFloat(num2) === 0) {
+        response.status = "error";
+        response.message = "Cannot divide by zero";
+        res.send(response);
+        return;
+    }
+
+    let result = parseFloat(num1)/parseFloat(num2);
+
+    let response = {};
+    
+    if (num1>1000000 || num2>1000000) {
+        response.status = "error";
+        response.message = "Overflow";
+        res.send(response);
+        return;
+    }
+
+    if (num1<-1000000 || num2<-1000000) {
+        response.status = "error";
+        response.message = "Underflow";
+        res.send(response);
+        return;
+    }
+
+    if (typeof(num1) === "string" || typeof(num2) === "string") {
+        response.status = "error";
+        response.message = "Invalid data types";
+        res.send(response);
+        return;
+    }
+
+    if (difference>1000000) {
+        response.status = "error";
+        response.message = "Overflow";
+        res.send(response);
+        return;
+    }
+
+    if (difference<-1000000) {
+        response.status = "error";
+        response.message = "Underflow";
+        res.send(response);
+        return;
+    }
+
+
+    response.status = "success";
+    response.message = "The product of given numbers";
+    response.result = result;
+    console.log(req.body);
+    res.send(response);
+});
+
 app.listen(port, () => console.log(`App listening on port ${port}!`))
 
 module.exports = app;
