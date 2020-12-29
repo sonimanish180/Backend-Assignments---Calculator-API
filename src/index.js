@@ -154,14 +154,14 @@ app.post('/multiply', (req, res) => {
         return;
     }
 
-    if (difference>1000000) {
+    if (result>1000000) {
         response.status = "error";
         response.message = "Overflow";
         res.send(response);
         return;
     }
 
-    if (difference<-1000000) {
+    if (result<-1000000) {
         response.status = "error";
         response.message = "Underflow";
         res.send(response);
@@ -213,14 +213,14 @@ app.post('/divide', (req, res) => {
         return;
     }
 
-    if (difference>1000000) {
+    if (result>1000000) {
         response.status = "error";
         response.message = "Overflow";
         res.send(response);
         return;
     }
 
-    if (difference<-1000000) {
+    if (result<-1000000) {
         response.status = "error";
         response.message = "Underflow";
         res.send(response);
@@ -229,7 +229,7 @@ app.post('/divide', (req, res) => {
 
 
     response.status = "success";
-    response.message = "The product of given numbers";
+    response.message = "The division of given numbers";
     response.result = result;
     console.log(req.body);
     res.send(response);
