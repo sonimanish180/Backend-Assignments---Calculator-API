@@ -180,6 +180,8 @@ app.post('/divide', (req, res) => {
 
     let num1 = req.body.num1;
     let num2 = req.body.num2;
+    
+    let response = {};
 
     if (parseFloat(num2) === 0) {
         response.status = "error";
@@ -190,7 +192,6 @@ app.post('/divide', (req, res) => {
 
     let result = parseFloat(num1)/parseFloat(num2);
 
-    let response = {};
     
     if (num1>1000000 || num2>1000000) {
         response.status = "error";
