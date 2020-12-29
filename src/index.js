@@ -23,11 +23,11 @@ app.post('/add', (req, res) => {
 
     let response = {};
 
-    if (!req.body.num1 || !req.body.num2) {
-        response.status = "failure";
-        res.status(404).send(response);
-        return;
-    }
+    // if (!req.body.num1 || !req.body.num2) {
+    //     response.status = "failure";
+    //     res.send(response);
+    //     return;
+    // }
 
     if (isNaN(num1) || isNaN(num2)) {
         response.status = "error";
@@ -51,7 +51,7 @@ app.post('/add', (req, res) => {
     }
     response.status = "success";
     response.message = "the sum of given two numbers";
-    response.result = Number(num1)+Number(num2);
+    response.sum = Number(num1)+Number(num2);
     console.log(req.body);
     res.status(200).send(response);
 });
