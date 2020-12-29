@@ -74,6 +74,57 @@ app.post('/add', (req, res) => {
     res.send(response);
 });
 
+app.post('/sub', (req, res) => {
+
+    let num1 = req.body.num1;
+    let num2 = req.body.num2;
+    let difference = parseFloat(num1) -  parseFloat(num2);
+
+    let response = {};
+    
+    if (num1>1000000 || num2>1000000) {
+        response.status = "error";
+        response.message = "Overflow";
+        res.send(response);
+        return;
+    }
+
+    if (num1<-1000000 || num2<-1000000) {
+        response.status = "error";
+        response.message = "Underflow";
+        res.send(response);
+        return;
+    }
+
+    if (typeof(num1) === "string" || typeof(num2) === "string") {
+        response.status = "error";
+        response.message = "Invalid data types";
+        res.send(response);
+        return;
+    }
+
+    if (difference>1000000) {
+        response.status = "error";
+        response.message = "Overflow";
+        res.send(response);
+        return;
+    }
+
+    if (difference<-1000000) {
+        response.status = "error";
+        response.message = "Underflow";
+        res.send(response);
+        return;
+    }
+
+
+    response.status = "success";
+    response.message = "the sum of given two numbers";
+    response.difference = difference;
+    console.log(req.body);
+    res.send(response);
+});
+
 app.listen(port, () => console.log(`App listening on port ${port}!`))
 
 module.exports = app;
