@@ -119,7 +119,7 @@ app.post('/sub', (req, res) => {
 
 
     response.status = "success";
-    response.message = "the sum of given two numbers";
+    response.message = "the difference of given two numbers";
     response.difference = difference;
     console.log(req.body);
     res.send(response);
