@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 // your code goes here
 app.get('/', (req, res) => {
-    res.status(200).send("Hello world!");
+    res.send("Hello world!");
 });
 
 app.post('/add', (req, res) => {
@@ -30,38 +30,39 @@ app.post('/add', (req, res) => {
     //     return;
     // }
 
-    if (typeof(num1) === "string" || typeof(num2) === "string") {
-        response.status = "error";
-        response.message = "Invalid data types";
-        res.status(400).send(response);
-        return;
-    }
-
+    
     if (num1>1000000 || num2>1000000) {
         response.status = "error";
         response.message = "Overflow";
-        res.status(400).send(response);
+        res.send(response);
         return;
     }
 
     if (num1<-1000000 || num2<-1000000) {
         response.status = "error";
         response.message = "Underflow";
-        res.status(400).send(response);
+        res.send(response);
+        return;
+    }
+
+    if (typeof(num1) === "string" || typeof(num2) === "string") {
+        response.status = "error";
+        response.message = "Invalid data types";
+        res.send(response);
         return;
     }
 
     if (sum>1000000) {
         response.status = "error";
         response.message = "Overflow";
-        res.status(400).send(response);
+        res.send(response);
         return;
     }
 
     if (sum<-1000000) {
         response.status = "error";
         response.message = "Underflow";
-        res.status(400).send(response);
+        res.send(response);
         return;
     }
 
@@ -70,7 +71,7 @@ app.post('/add', (req, res) => {
     response.message = "the sum of given two numbers";
     response.sum = sum;
     console.log(req.body);
-    res.status(200).send(response);
+    res.send(response);
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}!`))
